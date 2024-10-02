@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Mecanografia test</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/stylesheet.css'>
+</head>
+<body>
+    
+    <div class="game-container">
+        <h1>Typing Game</h1>
+        <div class="word-display">
+            <span id="word"></span>
+        </div>
+        <input type="text" id="input" placeholder="Escribe aquí..." autofocus>
+        <div class="stats">
+            <p>Tiempo: <span id="time">0</span> segundos</p>
+            <p>Palabras correctas: <span id="score">0</span></p>
+            <p>Palabras incorrectas: <span id="errors">0</span></p>
+        </div>
+        <button id="start-btn">Comenzar</button>
+    </div>
+
+    <script src='js/app.js'></script>
+</body>
+</html>
