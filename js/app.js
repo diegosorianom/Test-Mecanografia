@@ -14,23 +14,33 @@ let interval;
 let isPlaying = false;
 let currentWord;
 
-// Lista de palabras
-const words = ['javascript', 'html', 'css', 'programacion', 'teclado', 'ordenador', 'pantalla', 'desarrollo', 'sitio', 'codigo'];
+// Función para obtener palabras desde la API
+async function fetchRandomWord() {
+    try {
+        const response = await fetch('https://random-word-api.herokuapp.com/word?number=1');
+        const data = await response.json();
+        return data[0]; // Devolver la primera palabra obtenida
+    } catch (error) {
+        console.error('Error obteniendo palabra de la API:', error);
+        return 'error'; // Devolver una palabra por defecto en caso de error
+    }
+}
 
 // Función para obtener una palabra aleatoria
-function getRandomWord() {
-    return words[Math.floor(Math.random() * words.length)];
+async function getRandomWord() {
+    return await fetchRandomWord();
 }
 
 // Función para comenzar el juego
-function startGame() {
+async function startGame() {
     score = 0;
     errors = 0;
     time = 0;
     isPlaying = true;
     input.value = '';
     input.focus();
-    currentWord = getRandomWord();
+
+    currentWord = await getRandomWord(); // Obtener la primera palabra desde la API
     wordDisplay.textContent = currentWord;
 
     // Iniciar el temporizador
@@ -41,14 +51,14 @@ function startGame() {
 }
 
 // Función para verificar la palabra
-function checkWord() {
+async function checkWord() {
     if (!isPlaying) return;
 
     if (input.value.trim() === currentWord) {
         score++;
         scoreDisplay.textContent = score;
         input.value = '';
-        currentWord = getRandomWord();
+        currentWord = await getRandomWord(); // Obtener una nueva palabra desde la API
         wordDisplay.textContent = currentWord;
     } else if (input.value.length >= currentWord.length) {
         errors++;
